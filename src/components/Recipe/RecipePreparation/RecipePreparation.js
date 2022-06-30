@@ -1,21 +1,21 @@
-
 import React, { useEffect, useState } from "react";
-import Card from "../../atoms/Card";
+import { useSelector, useDispatch } from "react-redux";
+import Typography from "@mui/material/Typography";
+
+import Card from "../../atoms/Card"; //Reusable Component
 import classes from "./RecipePreparation.module.css";
 
+//Firebase
 import StartFireBase from "../../../Firebase";
 import { ref, set } from "firebase/database";
 
 import RecipeList from "./RecipeList";
-import Typography from "@mui/material/Typography";
-import { useSelector, useDispatch } from "react-redux";
 import CustomModal from "../CustomModal";
 import { getRecipe } from "../../../Redux/LoginSlice";
 
-const RecipePreparation = (props) => {
+const RecipePreparation = () => {
   let [database, setDatabase] = useState("");
   const dispatch = useDispatch();
-
   let data = useSelector((state) => state.userdata);
 
   useEffect(() => {
@@ -36,7 +36,6 @@ const RecipePreparation = (props) => {
       serving: datas.serving,
     })
       .then(() => {
-        console.log("Data Inserted");
         dispatch(getRecipe());
       })
       .catch((error) => {

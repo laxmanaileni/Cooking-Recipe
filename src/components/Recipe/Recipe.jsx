@@ -3,7 +3,7 @@ import { Fragment } from 'react'
 import RecipeSummary from './RecipeSummary';
 import RecipePreparation from './RecipePreparation/RecipePreparation'
 
-function Recipe(props) {
+function Recipe() {
   return (
     <Fragment>
         <RecipeSummary/>

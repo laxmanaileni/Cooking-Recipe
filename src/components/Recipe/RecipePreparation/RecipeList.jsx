@@ -1,13 +1,13 @@
 import {useEffect, useState} from 'react'
 import { useDispatch } from "react-redux";
+import Button from "@mui/material/Button";
 import classes from "./RecipeList.module.css";
 import CustomModal from "../CustomModal";
-import Button from "@mui/material/Button";
+import {  getRecipe } from "../../../Redux/LoginSlice";
 
 import StartFireBase from '../../../Firebase';
 import {ref,update,remove} from 'firebase/database'
 
-import {  getRecipe } from "../../../Redux/LoginSlice";
 const RecipeList = (props) => {
   let [database,setDatabase]=useState("")
   const dispatch = useDispatch();
@@ -28,7 +28,7 @@ const onSubmitHandler=(datas)=>{
        dateEdited: datas.dateEdited,
        notes: datas.notes,
        serving: datas.serving,
-     }).then(()=>{console.log("Data Updated");dispatch(getRecipe())}).catch((error)=>{console.log(error)})
+     }).then(()=>{dispatch(getRecipe())}).catch((error)=>{console.log(error)})
 
 }
 
@@ -37,7 +37,7 @@ const DeleteHandler=()=>{
 
   const db=database;
   const data=props.recipe.name;
-  remove(ref(db,'recipes/'+data)).then(()=>{console.log("Data Removed");dispatch(getRecipe())}).catch((error)=>{console.log(error)})
+  remove(ref(db,'recipes/'+data)).then(()=>{dispatch(getRecipe())}).catch((error)=>{console.log(error)})
 }
 
   return (

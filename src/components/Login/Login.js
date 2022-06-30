@@ -5,23 +5,22 @@ import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { getRecipe, loginReducer } from "../../Redux/LoginSlice";
-
-import Card from "../atoms/Card";
+import Card from "../atoms/Card"; //Reusable Component
 const Login = () => {
   const dispatch = useDispatch();
-
+  
   const loginHandler = (e) => {
     e.preventDefault();
     dispatch(loginReducer({ login: true }));
-   dispatch(getRecipe())
+    dispatch(getRecipe());
   };
+
   return (
     <Card>
       <Grid
         container
         justifyContent="center"
-        spacing={0}
-        
+        // spacing={0}
         className="login-form"
       >
         <Grid item>
@@ -73,4 +72,3 @@ const Login = () => {
   );
 };
 export default Login;
-

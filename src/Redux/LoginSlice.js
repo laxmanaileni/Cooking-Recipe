@@ -19,7 +19,6 @@ export const loginSlice = createSlice({
 });
 
 export const getRecipe = (params) => async (dispatch, getState) => {
-  console.log("GET CALL")
   const response = await fetch(
     "https://cookingrecipe-89cc3-default-rtdb.firebaseio.com/recipes.json"
   );
@@ -28,25 +27,23 @@ export const getRecipe = (params) => async (dispatch, getState) => {
   }
 
   const data = await response.json();
-  
+
   const loadedData = [];
 
-    for (const key in data) {
-      loadedData.push({
-        id: data[key].id,
-        name: data[key].name,
-        ingredients: data[key].ingredients,
-        instructions: data[key].instructions,
-        category: data[key].category,
-        dateAdded: data[key].dateAdded,
-        dateEdited: data[key].dateEdited,
-        notes: data[key].notes,
-        serving:data[key].serving
-      }
-      );
-    }
-    dispatch(updateData(loadedData))
-    console.log(loadedData);
+  for (const key in data) {
+    loadedData.push({
+      id: data[key].id,
+      name: data[key].name,
+      ingredients: data[key].ingredients,
+      instructions: data[key].instructions,
+      category: data[key].category,
+      dateAdded: data[key].dateAdded,
+      dateEdited: data[key].dateEdited,
+      notes: data[key].notes,
+      serving: data[key].serving,
+    });
+  }
+  dispatch(updateData(loadedData));
 };
 
 // export const postRecipe = (params) => async (dispatch, getState) => {
@@ -66,7 +63,6 @@ export const getRecipe = (params) => async (dispatch, getState) => {
 //   dispatch(getRecipe())
 // };
 
-
 // export const putRecipe = (params) => async (dispatch, getState) => {
 //   console.log("PUT CALL")
 // const response =await fetch(`https://cookingrecipe-89cc3-default-rtdb.firebaseio.com/recipes/${params}`,
@@ -85,7 +81,6 @@ export const getRecipe = (params) => async (dispatch, getState) => {
 //   dispatch(getRecipe())
 // };
 
-
-export const { loginReducer, updateUserData,updateData } = loginSlice.actions;
+export const { loginReducer, updateUserData, updateData } = loginSlice.actions;
 
 export default loginSlice.reducer;
